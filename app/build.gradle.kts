@@ -60,7 +60,12 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.coil.compose)
+
+//    agrego material para estilos
     implementation("androidx.compose.material:material-icons-extended:1.7.0")
+
+//    agrego coil para imagenes
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
