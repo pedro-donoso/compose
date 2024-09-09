@@ -3,7 +3,6 @@ package com.example.mymovies
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,11 +11,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.PlayCircleOutline
-import androidx.compose.material.icons.outlined.PlayArrow
-import androidx.compose.material.icons.twotone.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -24,9 +22,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -38,7 +38,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
+import coil.transform.CircleCropTransformation
+import coil.transform.RoundedCornersTransformation
 import com.example.mymovies.ui.theme.MyMoviesTheme
 
 class MainActivity : ComponentActivity() {
@@ -47,7 +49,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyMoviesTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    //Greeting(name = "Android")
                     MediaItem()
                 }
             }
@@ -66,8 +67,22 @@ fun MediaItem(){
             contentAlignment = Alignment.Center
         ) {
             AsyncImage(
-                model = "https://loremflickr.com/400/400/cat?lock=1",
-                contentDescription = null)
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data("https://loremflickr.com/400/400/cat?lock=2")
+                    .crossfade(2000)
+                   .build(),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+            Icon(
+                imageVector = Icons.Default.PlayCircleOutline,
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier
+                    .size(92.dp)
+                    .align(Alignment.Center)
+                )
         }
         Box (
             contentAlignment = Alignment.Center,
