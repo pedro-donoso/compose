@@ -73,19 +73,21 @@ class MainActivity : ComponentActivity() {
 fun MediaList() {
     LazyVerticalGrid(
         contentPadding = PaddingValues(4.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp),
-        columns = GridCells.Fixed(2)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        columns = GridCells.Adaptive(150.dp)
     ) {
         items(getMedia()) { item ->
-            MediaListItem(item)
+            MediaListItem(item, modifier = Modifier.padding(4.dp))
         }
     }
 }
 
 @ExperimentalCoilApi
 @Composable
-fun MediaListItem(item: MediaItem) {
-    Column {
+fun MediaListItem(item: MediaItem, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+    ) {
         Box(
             modifier = Modifier
                 .height(200.dp)

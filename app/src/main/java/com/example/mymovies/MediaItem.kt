@@ -1,7 +1,7 @@
 package com.example.mymovies
 
 fun getMedia(): List<MediaItem> {
-    return (1..10).map {
+    return (1..18).map {
         MediaItem(
             id = it,
             title = "Archivo $it",
