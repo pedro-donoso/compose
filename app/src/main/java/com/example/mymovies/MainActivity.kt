@@ -11,6 +11,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.PlayCircleOutline
+import androidx.compose.material.icons.outlined.PlayArrow
+import androidx.compose.material.icons.twotone.PlayArrow
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -56,7 +63,8 @@ fun MediaItem(){
         Box(
             modifier = Modifier
                 .height(200.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = rememberImagePainter(
@@ -66,6 +74,12 @@ fun MediaItem(){
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
+
+            Icon(imageVector = Icons.Default.PlayCircleOutline,
+                contentDescription = null,
+                modifier = Modifier.size(92.dp),
+                tint = Color.White
+                )
         }
         Box (
             contentAlignment = Alignment.Center,
@@ -75,7 +89,7 @@ fun MediaItem(){
                 .padding(16.dp)
         ) {
             Text(
-                text = "Title 1",
+                text = "Imagen 1",
                 style = MaterialTheme.typography.titleMedium
             )
         }
