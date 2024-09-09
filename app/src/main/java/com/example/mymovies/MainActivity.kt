@@ -37,9 +37,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import coil.compose.rememberImagePainter
-import coil.transform.BlurTransformation
-import coil.transform.CircleCropTransformation
 import com.example.mymovies.ui.theme.MyMoviesTheme
 
 class MainActivity : ComponentActivity() {
@@ -66,20 +65,9 @@ fun MediaItem(){
                 .fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
-            Image(
-                painter = rememberImagePainter(
-                    data = "https://picsum.photos/400/400"
-                ),
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-
-            Icon(imageVector = Icons.Default.PlayCircleOutline,
-                contentDescription = null,
-                modifier = Modifier.size(92.dp),
-                tint = Color.White
-                )
+            AsyncImage(
+                model = "https://loremflickr.com/400/400/cat?lock=1",
+                contentDescription = null)
         }
         Box (
             contentAlignment = Alignment.Center,
