@@ -5,8 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -66,7 +68,10 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun MediaList() {
-    LazyColumn {
+    LazyColumn(
+        contentPadding = PaddingValues(4.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
         items(getMedia()) { item ->
             MediaListItem(item)
         }
