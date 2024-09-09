@@ -3,6 +3,7 @@ package com.example.mymovies
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayCircleOutline
 import androidx.compose.material3.Icon
@@ -23,7 +25,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -35,12 +36,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
+import coil.compose.rememberAsyncImagePainter
 import com.example.mymovies.ui.theme.MyMoviesTheme
 
+data class MediaItem(
+    val id: Int,
+    val title: String,
+    val thumb: String,
+    val type: Type
+) {
+    enum class Type { PHOTO, VIDEO }
+}
+
+@ExperimentalCoilApi
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalCoilApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -58,16 +67,15 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MediaList() {
     LazyColumn {
-        items(10) {
-            MediaItem()
+        items(getMedia()) { item ->
+            MediaListItem(item)
         }
     }
 }
 
 @ExperimentalCoilApi
-@Preview(showBackground = true)
 @Composable
-fun MediaItem(){
+fun MediaListItem(item: MediaItem) {
     Column {
         Box(
             modifier = Modifier
@@ -75,25 +83,26 @@ fun MediaItem(){
                 .fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data("https://loremflickr.com/400/400/cat?lock=2")
-                    .crossfade(2000)
-                   .build(),
+            Image(
+                painter = rememberAsyncImagePainter(
+                    model = item.thumb
+                ),
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
-            Icon(
-                imageVector = Icons.Default.PlayCircleOutline,
-                contentDescription = null,
-                tint = Color.White,
-                modifier = Modifier
-                    .size(92.dp)
-                    .align(Alignment.Center)
+            if (item.type == MediaItem.Type.VIDEO) {
+                Icon(
+                    Icons.Default.PlayCircleOutline,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(92.dp)
+                        .align(Alignment.Center),
+                    tint = Color.White
                 )
+            }
         }
-        Box (
+        Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxWidth()
@@ -101,19 +110,11 @@ fun MediaItem(){
                 .padding(16.dp)
         ) {
             Text(
-                text = "Imagen 1",
+                text = item.title,
                 style = MaterialTheme.typography.titleMedium
             )
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
 @Preview(showBackground = true, widthDp = 200, heightDp = 100)
@@ -139,6 +140,7 @@ fun ButtonText() {
         )
     }
 }
+
 
 
 
