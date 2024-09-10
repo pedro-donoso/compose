@@ -51,6 +51,8 @@ android {
 
 dependencies {
 
+    implementation("com.google.android.material:material:1.3.0")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -61,10 +63,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.coil.compose)
 
-//    agrego material para estilos
     implementation("androidx.compose.material:material-icons-extended:1.7.0")
-
-//    agrego coil para imagenes
     implementation("io.coil-kt:coil-compose:2.4.0")
 
     testImplementation(libs.junit)
