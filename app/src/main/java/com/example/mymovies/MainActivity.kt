@@ -26,6 +26,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.PlayCircleOutline
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -74,7 +76,9 @@ class MainActivity : ComponentActivity() {
                         TopAppBar(
                             titulo = "Mis Películas",
                             icono = Icons.Default.PlayCircleOutline,
-                            onClickMenu = { /* Handle menu icon click */ }
+                            onClickMenu = { /* Handle menu icon click */ },
+                            onClickSearch = { /* Handle search icon click */ },
+                            onClickShare = { /* Handle share icon click */ }
                         )
                         MediaList()
                     }
@@ -89,7 +93,9 @@ fun TopAppBar(
     titulo: String,
     icono: ImageVector,
     modifier: Modifier = Modifier,
-    onClickMenu: () -> Unit
+    onClickMenu: () -> Unit,
+    onClickSearch: () -> Unit,
+    onClickShare: () -> Unit
 ) {
     Surface(
         modifier = modifier,
@@ -116,13 +122,32 @@ fun TopAppBar(
                 style = MaterialTheme.typography.titleMedium,
                 color = Color.White
             )
-            Spacer(modifier = Modifier.width(8.dp))
+
             Icon(
                 imageVector = icono,
                 contentDescription = null,
                 modifier = Modifier.size(24.dp),
                 tint = Color.White
             )
+            Spacer(modifier = Modifier.weight(1f))
+            Row {
+                IconButton(onClick = onClickSearch) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search",
+                        modifier = Modifier.size(24.dp),
+                        tint = Color.White
+                    )
+                }
+                IconButton(onClick = onClickShare) {
+                    Icon(
+                        imageVector = Icons.Default.Share,
+                        contentDescription = "Share",
+                        modifier = Modifier.size(24.dp),
+                        tint = Color.White
+                    )
+                }
+            }
         }
     }
 }
