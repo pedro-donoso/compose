@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import coil.annotation.ExperimentalCoilApi
 import com.example.mymovies.screens.main.MainScreen
-import com.example.mymovies.ui.theme.MyMoviesTheme
 
 data class MediaItem(
     val id: Int,
@@ -21,13 +20,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyMoviesTheme {
                 MainScreen()
-            }
         }
     }
-
-
 }
 
 
