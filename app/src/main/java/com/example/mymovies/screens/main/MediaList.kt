@@ -1,6 +1,5 @@
 package com.example.mymovies.screens.main
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberAsyncImagePainter
@@ -36,7 +34,7 @@ import com.example.mymovies.model.getMedia
 
 @ExperimentalCoilApi
 @Composable
-fun MediaList(modifier: Modifier) {
+fun MediaList(modifier: Modifier, onItemClick: Any) {
     LazyVerticalGrid(
         contentPadding = PaddingValues(dimensionResource(R.dimen.padding_xsmall)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_xsmall)),
