@@ -69,18 +69,20 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyMoviesTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    StateSample()
+                    val (value, onValueChange) = rememberSaveable { mutableStateOf("") }
+                    StateSample(
+                        value = value,
+                        onValueChange = onValueChange
+                    )
                 }
             }
         }
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
-@Preview(showBackground = true, widthDp = 400, heightDp = 400)
 @Composable
-fun StateSample() {
-    var text by rememberSaveable { mutableStateOf("") }
+fun StateSample(value: String, onValueChange: (String) -> Unit) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -88,21 +90,21 @@ fun StateSample() {
         verticalArrangement = Arrangement.Center
     ) {
         TextField(
-            value = text,
-            onValueChange = { text = it },
+            value = value,
+            onValueChange = { onValueChange(it) },
             modifier = Modifier
                 .fillMaxWidth()
         )
         Text(
-            text = text,
+            text = value,
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.Yellow)
                 .padding(8.dp)
         )
-        Button(onClick = { text = "" },
+        Button(onClick = { onValueChange("") },
             modifier = Modifier.fillMaxWidth(),
-            enabled = text.isNotEmpty()
+            enabled = value.isNotEmpty()
         ) {
             Text(text = "Clear")
         }
