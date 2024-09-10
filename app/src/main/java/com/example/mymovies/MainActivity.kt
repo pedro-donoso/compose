@@ -1,5 +1,6 @@
 package com.example.mymovies
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -21,11 +22,18 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayCircleOutline
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
@@ -60,15 +69,48 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyMoviesTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    MediaList()
+                    StateSample()
                 }
             }
         }
     }
 }
 
+@SuppressLint("UnrememberedMutableState")
+@Preview(showBackground = true, widthDp = 400, heightDp = 400)
+@Composable
+fun StateSample() {
+    var text by rememberSaveable { mutableStateOf("") }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(64.dp),
+        verticalArrangement = Arrangement.Center
+    ) {
+        TextField(
+            value = text,
+            onValueChange = { text = it },
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+        Text(
+            text = text,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Yellow)
+                .padding(8.dp)
+        )
+        Button(onClick = { text = "" },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = text.isNotEmpty()
+        ) {
+            Text(text = "Clear")
+        }
+    }
+}
+
 @ExperimentalCoilApi
-@Preview
+//@Preview
 @Composable
 fun MediaList() {
     LazyVerticalGrid(
@@ -81,6 +123,9 @@ fun MediaList() {
         }
     }
 }
+
+
+
 
 @ExperimentalCoilApi
 @Composable
@@ -128,7 +173,7 @@ fun MediaListItem(item: MediaItem, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true, widthDp = 200, heightDp = 100)
+//@Preview(showBackground = true, widthDp = 200, heightDp = 100)
 @Composable
 fun ButtonText() {
     Box(
