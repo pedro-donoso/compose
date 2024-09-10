@@ -11,18 +11,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.PlayCircleOutline
@@ -32,6 +28,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -53,7 +50,6 @@ import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberAsyncImagePainter
 import com.example.mymovies.ui.theme.MyMoviesTheme
-import androidx.compose.material3.TopAppBar
 
 data class MediaItem(
     val id: Int,
@@ -71,17 +67,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyMoviesTheme {
-                Surface(color = MaterialTheme.colorScheme.background) {
-                    Column {
-                        TopAppBar(
-                            titulo = "Mis Películas",
-                            icono = Icons.Default.PlayCircleOutline,
-                            onClickMenu = { /* Handle menu icon click */ },
-                            onClickSearch = { /* Handle search icon click */ },
-                            onClickShare = { /* Handle share icon click */ }
-                        )
-                        MediaList()
-                    }
+                Scaffold(
+                    topBar = { MainAppBar() }
+                ) { padding ->
+                    MediaList(modifier = Modifier.padding(padding))
                 }
             }
         }
@@ -122,13 +111,6 @@ fun TopAppBar(
                 style = MaterialTheme.typography.titleMedium,
                 color = Color.White
             )
-
-            Icon(
-                imageVector = icono,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp),
-                tint = Color.White
-            )
             Spacer(modifier = Modifier.weight(1f))
             Row {
                 IconButton(onClick = onClickSearch) {
@@ -155,7 +137,7 @@ fun TopAppBar(
 @ExperimentalCoilApi
 @Preview
 @Composable
-fun MediaList() {
+fun MediaList(modifier: Modifier) {
     LazyVerticalGrid(
         contentPadding = PaddingValues(4.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
