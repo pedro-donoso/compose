@@ -1,4 +1,4 @@
-package com.example.mymovies.ui
+package com.example.mymovies.screens.main
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

@@ -1,4 +1,6 @@
-package com.example.mymovies
+package com.example.mymovies.model
+
+import com.example.mymovies.MediaItem
 
 fun getMedia(): List<MediaItem> {
     return (1..18).map {
