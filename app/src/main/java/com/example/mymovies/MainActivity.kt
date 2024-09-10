@@ -24,9 +24,11 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.PlayCircleOutline
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -71,7 +73,8 @@ class MainActivity : ComponentActivity() {
                     Column {
                         TopAppBar(
                             titulo = "Mis Películas",
-                            icono = Icons.Default.PlayCircleOutline
+                            icono = Icons.Default.PlayCircleOutline,
+                            onClickMenu = { /* Handle menu icon click */ }
                         )
                         MediaList()
                     }
@@ -85,7 +88,8 @@ class MainActivity : ComponentActivity() {
 fun TopAppBar(
     titulo: String,
     icono: ImageVector,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClickMenu: () -> Unit
 ) {
     Surface(
         modifier = modifier,
@@ -99,6 +103,14 @@ fun TopAppBar(
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            IconButton(onClick = onClickMenu) { // Add a clickable menu icon
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = "Menu",
+                    modifier = Modifier.size(24.dp),
+                    tint = Color.White // White icon color
+                )
+            }
             Text(
                 text = titulo,
                 style = MaterialTheme.typography.titleMedium,
