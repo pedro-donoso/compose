@@ -89,6 +89,7 @@ fun TopAppBar(
 ) {
     Surface(
         modifier = modifier,
+        color = MaterialTheme.colorScheme.primary,
         shadowElevation = 4.dp
     ) {
         Row(
@@ -100,13 +101,15 @@ fun TopAppBar(
         ) {
             Text(
                 text = titulo,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium,
+                color = Color.White
             )
             Spacer(modifier = Modifier.width(8.dp))
             Icon(
                 imageVector = icono,
                 contentDescription = null,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(24.dp),
+                tint = Color.White
             )
         }
     }
