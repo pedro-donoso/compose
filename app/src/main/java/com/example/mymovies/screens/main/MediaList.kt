@@ -25,20 +25,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberAsyncImagePainter
 import com.example.mymovies.MediaItem
+import com.example.mymovies.R
 import com.example.mymovies.model.getMedia
 
 @ExperimentalCoilApi
 @Composable
 fun MediaList(modifier: Modifier) {
     LazyVerticalGrid(
-        contentPadding = PaddingValues(4.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        columns = GridCells.Adaptive(150.dp)
+        contentPadding = PaddingValues(dimensionResource(R.dimen.padding_xsmall)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_xsmall)),
+        columns = GridCells.Adaptive(dimensionResource(R.dimen.padding_small))
     ) {
         items(getMedia()) { item ->
             MediaListItem(item, modifier = Modifier.padding(4.dp))
@@ -54,7 +56,7 @@ fun MediaListItem(item: MediaItem, modifier: Modifier = Modifier) {
     ) {
         Box(
             modifier = Modifier
-                .height(200.dp)
+                .height(dimensionResource(R.dimen.cell_thumb_height))
                 .fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
@@ -71,7 +73,7 @@ fun MediaListItem(item: MediaItem, modifier: Modifier = Modifier) {
                     Icons.Default.PlayCircleOutline,
                     contentDescription = null,
                     modifier = Modifier
-                        .size(92.dp)
+                        .size(dimensionResource(R.dimen.cell_play_icon_size))
                         .align(Alignment.Center),
                     tint = Color.White
                 )
@@ -82,7 +84,7 @@ fun MediaListItem(item: MediaItem, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.secondary)
-                .padding(16.dp)
+                .padding(dimensionResource(R.dimen.padding_medium))
         ) {
             Text(
                 text = item.title,
