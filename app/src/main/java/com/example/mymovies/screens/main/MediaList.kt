@@ -88,7 +88,7 @@ fun MediaListItem(item: MediaItem, modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = item.title,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleSmall
             )
         }
     }

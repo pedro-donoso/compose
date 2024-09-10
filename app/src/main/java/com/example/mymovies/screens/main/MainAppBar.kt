@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MainAppBar() {
     TopAppBar(
-        titulo = "Mis Películas",
+        titulo = "Mis Capturas",
         icono = Icons.Default.PlayCircleOutline,
         onClickMenu = { /* Handle menu icon click */ },
         onClickSearch = { /* Handle search icon click */ },
@@ -65,7 +65,7 @@ fun TopAppBar(
             }
             Text(
                 text = titulo,
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.titleLarge,
                 color = Color.White
             )
             Spacer(modifier = Modifier.weight(1f))
