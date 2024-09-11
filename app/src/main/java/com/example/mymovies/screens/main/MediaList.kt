@@ -1,6 +1,7 @@
 package com.example.mymovies.screens.main
 
 import android.icu.text.CaseMap
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
@@ -53,6 +55,7 @@ fun MediaList(modifier: Modifier, onItemClick: Any, navController: NavHostContro
     }
 }
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun MediaListItem(
     mediaItem: MediaItem,
@@ -60,7 +63,14 @@ fun MediaListItem(
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier.clickable { navController.navigate("detail/${mediaItem.id}") },
+        modifier = modifier
+            .clickable { navController.navigate("detail/${mediaItem.id}") }
+            .shadow(8.dp),
+        border = BorderStroke(1.dp, Color.Black),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = Color.White
+        ),
         shape = RoundedCornerShape(4.dp)
     ) {
         Column {
