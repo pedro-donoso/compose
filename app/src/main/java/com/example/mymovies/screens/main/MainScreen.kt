@@ -26,7 +26,9 @@ fun MainScreen(navController: NavHostController) {
             modifier = Modifier.padding(horizontal = 16.dp),
             onItemClick = { mediaItem: MediaItem ->
                 navController.navigate("detail/${mediaItem.id}")
-            }
+            },
+            navController = navController
         )
     }
 }
+
