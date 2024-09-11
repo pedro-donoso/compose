@@ -11,6 +11,7 @@ import androidx.compose.ui.layout.ContentScale
 import coil.compose.rememberAsyncImagePainter
 import com.example.mymovies.model.getMedia
 
+//funciona
 @Composable
 fun DetailScreen(mediaId: Int) {
     val mediaItem = getMedia().find { it.id == mediaId }
