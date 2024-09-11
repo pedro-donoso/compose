@@ -61,7 +61,6 @@ fun MediaListItem(
             .clickable { navController.navigate("detail/${mediaItem.id}") }
     ) {
         Thumb(mediaItem)
-        Title(mediaItem)
     }
 }
 

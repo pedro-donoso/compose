@@ -70,6 +70,9 @@ dependencies {
 //    agrego coil para imagenes
     implementation(libs.coil.compose.v240)
 
+    implementation("androidx.compose.material:material:1.7.0")
+    implementation("androidx.compose.material3:material3:1.3.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
