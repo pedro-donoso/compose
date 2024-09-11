@@ -2,6 +2,7 @@ package com.example.mymovies.screens.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberAsyncImagePainter
 import com.example.mymovies.MediaItem
@@ -34,23 +36,24 @@ import com.example.mymovies.model.getMedia
 
 @ExperimentalCoilApi
 @Composable
-fun MediaList(modifier: Modifier, onItemClick: Any) {
+fun MediaList(modifier: Modifier, onItemClick: Any, navController: NavHostController) {
     LazyVerticalGrid(
         contentPadding = PaddingValues(dimensionResource(R.dimen.padding_xsmall)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_xsmall)),
         columns = GridCells.Adaptive(dimensionResource(R.dimen.padding_small))
     ) {
         items(getMedia()) { item ->
-            MediaListItem(item, modifier = Modifier.padding(4.dp))
+            MediaListItem(item, modifier = Modifier.padding(4.dp), navController = navController)
         }
     }
 }
 
 @ExperimentalCoilApi
 @Composable
-fun MediaListItem(item: MediaItem, modifier: Modifier = Modifier) {
+fun MediaListItem(item: MediaItem, modifier: Modifier = Modifier, navController: NavHostController) {
     Column(
         modifier = modifier
+            .clickable { navController.navigate("detail/${item.id}") }
     ) {
         Box(
             modifier = Modifier
