@@ -1,5 +1,6 @@
 package com.example.mymovies.screens.main
 
+import android.icu.text.CaseMap
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,6 +34,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.mymovies.MediaItem
 import com.example.mymovies.R
 import com.example.mymovies.model.getMedia
+import com.example.mymovies.screens.common.Thumb
 
 @ExperimentalCoilApi
 @Composable
@@ -48,50 +50,25 @@ fun MediaList(modifier: Modifier, onItemClick: Any, navController: NavHostContro
     }
 }
 
-@ExperimentalCoilApi
 @Composable
-fun MediaListItem(item: MediaItem, modifier: Modifier = Modifier, navController: NavHostController) {
+fun MediaListItem(
+    mediaItem: MediaItem,
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
-            .clickable { navController.navigate("detail/${item.id}") }
+            .clickable { navController.navigate("detail/${mediaItem.id}") }
     ) {
-        Box(
-            modifier = Modifier
-                .height(dimensionResource(R.dimen.cell_thumb_height))
-                .fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                painter = rememberAsyncImagePainter(
-                    model = item.thumb
-                ),
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-            if (item.type == MediaItem.Type.VIDEO) {
-                Icon(
-                    Icons.Default.PlayCircleOutline,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(dimensionResource(R.dimen.cell_play_icon_size))
-                        .align(Alignment.Center),
-                    tint = Color.White
-                )
-            }
-        }
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.secondary)
-                .padding(dimensionResource(R.dimen.padding_medium))
-        ) {
-            Text(
-                text = item.title,
-                style = MaterialTheme.typography.titleSmall
-            )
-        }
+        Thumb(mediaItem)
+        Title(mediaItem)
     }
 }
+
+@Composable
+fun Title(mediaItem: MediaItem) {
+    Text(text = mediaItem.title)
+}
+
+
 
