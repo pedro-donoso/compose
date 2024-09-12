@@ -25,7 +25,7 @@ fun DetailScreen(mediaId: Int) {
         topBar = {
             TopAppBar(
                 title = { Text(mediaItem.title) },
-                backgroundColor = Color.Magenta,
+                backgroundColor = Color.Blue,
                 contentColor = Color.White
 
             )
