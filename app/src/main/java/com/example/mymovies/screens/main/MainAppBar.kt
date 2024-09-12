@@ -1,5 +1,6 @@
 package com.example.mymovies.screens.main
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -96,6 +97,7 @@ fun TopAppBar(
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreenWithScaffold() {
     Scaffold(

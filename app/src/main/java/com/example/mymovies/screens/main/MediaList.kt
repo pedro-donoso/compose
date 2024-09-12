@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayCircleOutline
@@ -71,7 +72,7 @@ fun MediaListItem(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = Color.White
         ),
-        shape = RoundedCornerShape(4.dp)
+        shape = CutCornerShape(4.dp)
     ) {
         Column {
             Thumb(mediaItem)
